@@ -187,6 +187,7 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
               name="rentAmount"
               value={tenancy.propertyDetails.rentAmount}
               label={t("F1SC.stepZero.rentAmount")}
+              sublabel={t("F1SC.stepZero.rentAmountTwo")}
               placeholder={t("F1SC.stepZero.rentAmountPL")}
               onChange={(e) => handleProperty(e)}
               error={errors.rentAmount}

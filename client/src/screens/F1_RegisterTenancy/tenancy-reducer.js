@@ -6,7 +6,7 @@ import {
 } from "./constants";
 
 export const DefaultTenancy = {
-  agencyName: "Ukio",
+  agencyName: "UKIO",
   tenancyID: "",
 
   propertyDetails: {

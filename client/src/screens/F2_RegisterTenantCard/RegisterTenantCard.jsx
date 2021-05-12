@@ -22,7 +22,7 @@ import WhatsappBubble from "../../components/WhatsappBubble/WhatsappBubble";
 // Images
 import RimboLogo from "../../images/rimbo-logo.png";
 import StripeLogo from "../../images/secure-payments.png";
-import StarCityImage from "../../images/starcity-image.png";
+import UkioSuccess from "../../images/undraw_Order_confirmed_re_g0if.svg";
 
 // Styles
 import Loader from "react-loader-spinner";
@@ -442,7 +442,7 @@ const RegisterTenantCard = ({ t }) => {
                 <p>{t("cardsuccess.textTwo")}</p>
               </div>
               <div className={style.success_container_right}>
-                <img src={StarCityImage} alt="StarCity co-living logo" />
+                <img src={UkioSuccess} alt="StarCity co-living logo" />
               </div>
             </main>
             <div className={style.rimbo_sign_success}>

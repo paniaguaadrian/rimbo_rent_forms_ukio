@@ -1,10 +1,14 @@
 // Styles
 import styles from "./input.module.scss";
 
-const Input = ({ label, error, ...rest }) => {
+const Input = ({ label, sublabel, error, ...rest }) => {
   return (
     <div className={styles.Input}>
-      <label>{label}</label>
+      <div className={styles.containerLabel}>
+        <label>{label}</label>
+        <p>{sublabel}</p>
+      </div>
+
       <input {...rest} />
       {error && (
         <div className={styles.InputErrorContainer}>
