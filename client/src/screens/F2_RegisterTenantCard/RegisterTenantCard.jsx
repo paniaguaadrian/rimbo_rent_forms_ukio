@@ -242,7 +242,7 @@ const RegisterTenantCard = ({ t }) => {
             tenantsPhone,
             timestamps,
             agencyName: tenancyData.agent.agencyName,
-            building: tenancyData.property.building,
+            rentalAddress: tenancyData.property.rentalAddress,
             rentStartDate: tenancyData.rentStartDate,
             rentEndDate: tenancyData.rentEndDate,
           });
@@ -254,7 +254,7 @@ const RegisterTenantCard = ({ t }) => {
             tenantsPhone,
             timestamps,
             agencyName: tenancyData.agent.agencyName,
-            building: tenancyData.property.building,
+            rentalAddress: tenancyData.property.rentalAddress,
             rentStartDate: tenancyData.rentStartDate,
             rentEndDate: tenancyData.rentEndDate,
           });
