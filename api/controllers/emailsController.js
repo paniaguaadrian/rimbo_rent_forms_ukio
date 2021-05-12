@@ -114,7 +114,7 @@ const sendF1SCFormEmails = async (req, res) => {
     },
   };
 
-  const ukioEmail = {
+  const UkioEmail = {
     from: "Ukio & Rimbo info@rimbo.rent",
     to: ukioEmail, // Ukio Email
     subject: "Registro de inquilino correcto",
@@ -160,7 +160,7 @@ const sendF1SCFormEmails = async (req, res) => {
     }
   });
 
-  transporterE1SC.sendMail(ukioEmail, (err, data) => {
+  transporterE1SC.sendMail(UkioEmail, (err, data) => {
     if (err) {
       console.log("There is an error here...!" + err);
     } else {

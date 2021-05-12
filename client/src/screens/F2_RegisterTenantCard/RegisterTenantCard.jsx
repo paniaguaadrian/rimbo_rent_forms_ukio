@@ -344,11 +344,19 @@ const RegisterTenantCard = ({ t }) => {
                           onChange={handleCardDetailsChange}
                           className={style.tarjeta}
                         />
-                        <p>
-                          {t("F2TT.warningcreditcard")}
-                          {tenancyData.product}
-                          {t("F2TT.warningcreditcardTwo")}
-                        </p>
+                        {tenancyData.product === "1 month" || "1 mes" ? (
+                          <p>
+                            {t("F2TT.warningcreditcard")}
+                            {tenancyData.product.slice(0, 1)}
+                            {t("F2TT.warningcreditcardTwo")}
+                          </p>
+                        ) : (
+                          <p>
+                            {t("F2TT.warningcreditcard")}
+                            {tenancyData.product.slice(0, 1)}
+                            {t("F2TT.warningcreditcardThree")}
+                          </p>
+                        )}
                       </label>
 
                       <div className={style.ErrorInput}>
