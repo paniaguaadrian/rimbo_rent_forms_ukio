@@ -15,12 +15,22 @@
     justify-content: space-between;
   }
 
-  .LogoImage {
-    height: 2.8rem !important;
-    margin-left: 2rem;
-    @include xl {
-      height: 2rem !important;
-      margin-left: 2rem;
+  .LogoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 3rem;
+    .LogoImage {
+      height: 4rem !important;
+      // margin-left: 2rem;
+      @include xl {
+        height: 3.5rem !important;
+        // margin-left: 3rem;
+      }
+    }
+    p {
+      font-size: 2.2rem;
+      margin-left: 0.5rem;
     }
   }
 

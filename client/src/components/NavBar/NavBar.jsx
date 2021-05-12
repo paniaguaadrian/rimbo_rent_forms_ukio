@@ -2,7 +2,7 @@
 import React from "react";
 
 // Images
-import StarCityLogo from "../../images/starcity-logo.png";
+import UkioLogo from "../../images/ukio_logo.jpeg";
 import SpanishLogo from "../../images/spanish-language.png";
 import EnglishLogo from "../../images/english-language.png";
 
@@ -20,11 +20,10 @@ const NavBar = () => {
 
   return (
     <div className={styles.NavBarContainer}>
-      <img
-        className={styles.LogoImage}
-        src={StarCityLogo}
-        alt="Starcity Logo"
-      />
+      <div className={styles.LogoContainer}>
+        <img className={styles.LogoImage} src={UkioLogo} alt="Ukio Logo" />
+        <p>ukio</p>
+      </div>
 
       <div className={styles.ToggleButtonContainer}>
         <button
