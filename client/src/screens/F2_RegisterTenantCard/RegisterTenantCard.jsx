@@ -344,7 +344,7 @@ const RegisterTenantCard = ({ t }) => {
                           onChange={handleCardDetailsChange}
                           className={style.tarjeta}
                         />
-                        {tenancyData.product === "1 month" || "1 mes" ? (
+                        {tenancyData.product.slice(0, 1) === "1" ? (
                           <p>
                             {t("F2TT.warningcreditcard")}
                             {tenancyData.product.slice(0, 1)}
