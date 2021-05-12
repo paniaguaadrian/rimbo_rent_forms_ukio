@@ -72,6 +72,9 @@ const RegisterTenantCard = ({ t }) => {
   const elements = useElements();
 
   const [tenancyData, setTenancyData] = useState([]);
+  const [tenantsName, setTenantsName] = useState("");
+  const [tenantsFirstName, setTenantsFirstName] = useState("");
+  const [tenantsLastName, setTenantsLastName] = useState("");
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null); //eslint-disable-line
 
@@ -126,13 +129,21 @@ const RegisterTenantCard = ({ t }) => {
 
       const { data: decisionResult } = await postDecision(postBody);
 
-      const { tenantsName, tenantsEmail, tenantsPhone } = tenancyData.tenant;
+      const { tenantsFirstName, tenantsLastName, tenantsEmail, tenantsPhone } =
+        tenancyData.tenant;
       const { agencyName } = tenancyData.agent;
+
+      const tenantsName = `${tenantsFirstName} ${tenantsLastName}`;
+
+      setTenantsName(tenantsName);
+      setTenantsFirstName(tenantsFirstName);
+      setTenantsLastName(tenantsLastName);
 
       if (tenancyData.tenant.isTrying === false) {
         if (i18n.language === "en") {
           axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/e2r`, {
-            tenantsName,
+            tenantsFirstName,
+            tenantsLastName,
             tenantsEmail,
             tenantsPhone,
             randomID,
@@ -140,7 +151,8 @@ const RegisterTenantCard = ({ t }) => {
           });
         } else {
           axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2r`, {
-            tenantsName,
+            tenantsFirstName,
+            tenantsLastName,
             tenantsEmail,
             tenantsPhone,
             randomID,
@@ -224,7 +236,8 @@ const RegisterTenantCard = ({ t }) => {
         // ! Post to Email service
         if (i18n.language === "en") {
           await axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/e3`, {
-            tenantsName,
+            tenantsFirstName,
+            tenantsLastName,
             tenantsEmail,
             tenantsPhone,
             timestamps,
@@ -235,7 +248,8 @@ const RegisterTenantCard = ({ t }) => {
           });
         } else {
           await axios.post(`${REACT_APP_BASE_URL_EMAIL}/e3`, {
-            tenantsName,
+            tenantsFirstName,
+            tenantsLastName,
             tenantsEmail,
             tenantsPhone,
             timestamps,
@@ -297,7 +311,7 @@ const RegisterTenantCard = ({ t }) => {
                           <input
                             id="name"
                             type="text"
-                            value={tenancyData.tenant.tenantsName}
+                            value={tenantsName}
                             disabled
                           />
                         </div>
@@ -330,7 +344,11 @@ const RegisterTenantCard = ({ t }) => {
                           onChange={handleCardDetailsChange}
                           className={style.tarjeta}
                         />
-                        <p>{t("F2TT.warningcreditcard")}</p>
+                        <p>
+                          {t("F2TT.warningcreditcard")}
+                          {tenancyData.product}
+                          {t("F2TT.warningcreditcardTwo")}
+                        </p>
                       </label>
 
                       <div className={style.ErrorInput}>

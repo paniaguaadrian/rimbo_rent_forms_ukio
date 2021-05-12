@@ -6,19 +6,21 @@ import {
 } from "./constants";
 
 export const DefaultTenancy = {
-  agencyName: "Starcity",
+  agencyName: "Ukio",
   tenancyID: "",
 
   propertyDetails: {
-    building: "",
+    rentalAddress: "",
     room: "",
     rentAmount: "",
     rentStartDate: "",
     rentEndDate: "",
+    product: "",
   },
 
   tenantContactDetails: {
-    tenantName: "",
+    tenantsFirstName: "",
+    tenantsLastName: "",
     tenantPhone: "",
     tenantEmail: "",
     randomID: "",
@@ -28,7 +30,6 @@ export const DefaultTenancy = {
     documentType: "",
     documentNumber: "",
     monthlyNetIncome: "",
-    acceptanceCriteria: "",
     jobType: "",
     isAgentAccepted: true,
   },

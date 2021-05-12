@@ -1,10 +1,6 @@
 export const isProperty = (values) => {
   let errors = {};
 
-  if (!values.building) {
-    errors.building = "Enter a building for the tenant.";
-  }
-
   if (!values.room) {
     errors.room = "Enter a room for the tenant.";
   }
@@ -26,8 +22,11 @@ export const isProperty = (values) => {
 
 export const isTenant = (values) => {
   let errors = {};
-  if (!values.tenantName) {
-    errors.tenantName = "Tenant name is required";
+  if (!values.tenantsFirstName) {
+    errors.tenantName = "Tenant first name is required";
+  }
+  if (!values.tenantsLastName) {
+    errors.tenantName = "Tenant last name is required";
   }
   if (!values.tenantPhone) {
     errors.tenantPhone = "Phone number is required";
@@ -56,10 +55,6 @@ export const isMoreTenant = (values) => {
 
   if (!values.documentType) {
     errors.documentType = "Document Type is required";
-  }
-
-  if (!values.acceptanceCriteria) {
-    errors.acceptanceCriteria = "Writte a criteria for the tenant.";
   }
 
   if (!values.documentNumber) {

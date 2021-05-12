@@ -324,6 +324,10 @@ text-decoration: none;
 	color: white!important;
 }
 
+.multilanguage_header{
+	margin-top: 3rem;
+}
+
 
 
 /*PROJECT*/
@@ -385,19 +389,35 @@ text-decoration: none;
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
           			<td class="logo" style="text-align: center;">
-			            <img class='logo-image' src="cid:starcitylogo"><a href="https://starcity.com/"></a></img>
+			            <img class='logo-image' src="cid:ukiologo"><a href="https://www.stayukio.com/"></a></img>
 			          </td>
           		</tr>
           	</table>
           </td>
 	      </tr><!-- end tr -->
-				<tr>
+
+		  <tr>
+			  <td valign="middle" class="hero hero-2 bg_white" style="padding: 1em 0; text-align: left;">
+            <table  role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+            	<tr>
+            		<td class="bg_white email-section">
+						<div class="heading-section" style="text-align: left; padding: 0 30px;">
+						<p style="text-align: left; font-size: 12px; color: black;">English text at the end of the email</p>
+						</div>
+            			
+            		</td>
+            	</tr>
+            </table>
+          </td>
+		  </tr>
+
+		<tr>
           <td valign="middle" class="hero hero-2 bg_white" style="padding: 1em 0;">
             <table>
             	<tr>
             		<td>
             			<div class="text" style="padding: 0 3em; text-align: left;">
-							<h3>Great news, {{tenantsName}}!</h3>			
+							<h3>¡Buenas noticias {{tenantsFirstName}},</h3>			
             				
             			</div>
             		</td>
@@ -405,29 +425,31 @@ text-decoration: none;
             </table>
           </td>
 	      </tr><!-- end tr -->
+
+
 	      <tr>
 		      <td class="bg_white">
 		        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 		          <tr>
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: left; padding: 0 30px;">
-		              	<h3>We are very excited that you want to join our community in  <b>{{building}}</b>!</h3>
+		              	<h3>Estamos muy contentos de que te quieras unir a nosotros en <b>{{rentalAddress}}</b>!</h3>
 
 		            	</div>
 		          </tr><!-- end: tr -->
 					<td valign="middle" class="hero hero-2 bg_white" style="padding: 1em 0;">
 
-            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+           			 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 		          <tr>
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: left; padding: 0 30px; color: #6aa3a1;">
-		              	<h3><u>There is only one important step left:</u></h3>
+		              	<h3><u>Solo falta un último detalle para terminar el proceso de registro:</u></h3>
 						 
 		              	
 		            	</div>
 		          </tr><!-- end: tr -->
 					
-			</table>
+				</table>
 
 			
 
@@ -437,9 +459,96 @@ text-decoration: none;
 						<td>
 							<div class="text" style="padding: 1em 3em; text-align: left;">
 								
-								<h3>At Starcity we believe in new disruptive models that make renting easier and faster. <b>This is why in this community it is not necessary to pay a deposit.</b></h3>
+								<h3>En {{agencyName}} creemos en nuevos modelos disruptivos para flexibilizar y facilitar el alquiler. <b>Es por eso que en esta comunidad no es necesario pagar una fianza.</b></h3>
 								<br>
-								<h3>You are responsible for taking care of the community and paying your rent on time, but as we believe in our members we won’t ask you to pay any deposit upfront, only in case something happens.</h3>
+								<h3>Sigues siendo responsable de cuidar la comunidad y pagar tu alquiler a tiempo. Pero confiamos en nuestros inquilinos y no cobramos la fianza por adelantado, solo en caso de que algo ocurra.</h3>
+								<br>
+								<h3>Regístrate con tu tarjeta de débito pulsando el link al final del mail. La tarjeta debe estar conectada con tu cuenta principal (donde tienes tus ingresos o ahorros).</h3>
+								
+							</div>
+						</td>
+					</tr>
+			</table>
+
+			<table>
+					<tr>
+						<td>
+							<div class="text" style="padding: 1em 3em; text-align: left;">
+								
+								<h3>¡Bienvenido a la revolución de los depósitos!</h3>
+								
+							</div>
+						</td>
+					</tr>
+			</table>
+
+			 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+		          <tr>
+		            <td class="bg_white email-section">
+		            	<div class="heading-section" style="text-align: center; padding: 0px 30px; color: #6aa3a1;">
+
+		              	<button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/card/{{randomID}}">¡Empieza ahora!</a></button>
+
+						<button class='btn-rimbo' type="button"><a href="https://starcity.rimbo.rent/register/card/{{randomID}}">¡Empieza ahora!</a></button>
+
+						  
+		          </tr><!-- end: tr -->
+					
+			</table>
+
+
+			<table>
+            	<tr>
+            		<td>
+            			<div class="text" style="padding: 0 3em; text-align: left;">
+							<hr style="width: 15rem; color: red; height: 0px; border-color: #6aa3a1; border-radius: 5rem; margin-top: 2rem;">			
+            			</div>
+            		</td>
+            	</tr>
+            </table>
+
+			
+            <table>
+            	<tr>
+            		<td>
+            			<div class="text" style="padding: 0 3em; text-align: left;">
+							<h3 class="multilanguage_header">Great news, {{tenantsFirstName}}!</h3>			
+            				
+            			</div>
+            		</td>
+            	</tr>
+            </table>
+        
+	      
+	      
+		        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+		          <tr>
+		            <td class="bg_white email-section">
+		            	<div class="heading-section" style="text-align: left; padding: 0 30px;">
+		              	<h3>We are very excited that you want to join us in <b>{{rentalAddress}}</b>!</h3>
+
+		            	</div>
+		          </tr><!-- end: tr -->
+					<td valign="middle" class="hero hero-2 bg_white" style="padding: 1em 0;">
+
+            		<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+		          	<tr>
+		            	<td class="bg_white email-section">
+		            		<div class="heading-section" style="text-align: left; padding: 0 30px; color: #6aa3a1;">
+		              		<h3><u>There is only one important step left:</u></h3>
+						 	</div>
+		          	</tr><!-- end: tr -->
+					</table>
+				</table>
+
+            <table>
+					<tr>
+						<td>
+							<div class="text" style="padding: 1em 3em; text-align: left;">
+								
+								<h3>At {{agencyName}} we believe in new disruptive models that make renting easier and faster. <b>This is why in this community it is not necessary to pay a deposit.</b></h3>
+								<br>
+								<h3>You are responsible for taking care of the community and paying your rent on time, but as we believe in our tenants we won’t ask you to pay any deposit upfront, only in case something happens.</h3>
 								<br>
 								<h3>Register by clicking on the following link and entering your debit card details. The card must be connected to your main bank account (where you keep your savings or monthly income).</h3>
 								
@@ -460,33 +569,19 @@ text-decoration: none;
 					</tr>
 			</table>
 
-			 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+			<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 		          <tr>
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: center; padding: 0px 30px; color: #6aa3a1;">
-		              	{{!-- <button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/card/{{randomID}}">Start Now!</a></button> --}}
 
-						<button class='btn-rimbo' type="button"><a href="https://starcity.rimbo.rent/register/card/{{randomID}}">Start Now!</a></button>
+		              	<button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/card/{{randomID}}">¡Empieza ahora!</a></button>
 
-						{{!-- <button class='btn-rimbo' type="button"><a href="https://badi.rimbo.rent/register/card/{{randomID}}">Start Now!</a></button> --}}
+						<button class='btn-rimbo' type="button"><a href="https://starcity.rimbo.rent/register/card/{{randomID}}">¡Start now!</a></button>
+
 						  
 		          </tr><!-- end: tr -->
 					
 			</table>
-
-			{{!-- <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-		          <tr>
-		            <td class="bg_white email-section">
-		            	<div class="heading-section" style="text-align: center; padding: 0 30px; color: #6aa3a1;">
-		              	<h4>¡Bienvenido a la revolución de los depósitos!</h4>
-						 
-		              	
-		            	</div>
-		          </tr><!-- end: tr -->
-					
-			</table> --}}
-
-           
 
 			<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 		          <tr>
@@ -534,7 +629,7 @@ text-decoration: none;
                       	<h3 class="heading">Useful Links</h3>
                       	<ul>
 					                <li><a href="http://www.rimbo.rent">Rimbo Rent</a></li>
-					                <li><a href="https://starcity.com/">Starcity</a></li>
+					                <li><a href="https://www.stayukio.com/">ukio</a></li>
 					                
 					              </ul>
                       </td>

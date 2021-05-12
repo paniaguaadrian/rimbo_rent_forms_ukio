@@ -45,14 +45,27 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
           <div className={styles.FormLeft}>
             <Input
               type="text"
-              name="tenantName"
-              value={tenancy.tenantContactDetails.tenantName}
-              label={t("F1SC.stepOne.tenantName")}
-              placeholder={t("F1SC.stepOne.tenantNamePL")}
+              name="tenantsFirstName"
+              value={tenancy.tenantContactDetails.tenantsFirstName}
+              label={t("F1SC.stepOne.tenantsFirstName")}
+              placeholder={t("F1SC.stepOne.tenantsFirstNamePL")}
+              onChange={(e) => handleTenant(e)}
+              error={errors.tenantsFirstName}
+            />
+          </div>
+          <div className={styles.FormLeft}>
+            <Input
+              type="text"
+              name="tenantsLastName"
+              value={tenancy.tenantContactDetails.tenantsLastName}
+              label={t("F1SC.stepOne.tenantsLastName")}
+              placeholder={t("F1SC.stepOne.tenantsLastNamePL")}
               onChange={(e) => handleTenant(e)}
               error={errors.tenantName}
             />
           </div>
+        </div>
+        <div className={styles.GroupInput}>
           <div className={styles.FormLeft}>
             <Input
               type="email"
@@ -64,8 +77,6 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
               error={errors.tenantEmail}
             />
           </div>
-        </div>
-        <div className={styles.GroupInputAlone}>
           <div className={styles.FormLeft}>
             <Input
               type="text"

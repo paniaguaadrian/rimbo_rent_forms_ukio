@@ -35,7 +35,7 @@ import PlacesAutocomplete, {
 const {
   REACT_APP_BASE_URL,
   REACT_APP_API_RIMBO_TENANCY,
-  REACT_APP_API_RIMBO_TENANCY_STARCITY,
+  REACT_APP_API_RIMBO_TENANCY_UKIO,
   REACT_APP_API_RIMBO_TENANT,
   REACT_APP_BASE_URL_EMAIL,
 } = process.env;
@@ -116,7 +116,8 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
         //  Agency
         agencyName: data.agent.agencyName,
         // Tenant
-        tenantsName: data.tenant.tenantsName,
+        tenantsFirstName: data.tenant.tenantsFirstName,
+        tenantsLastName: data.tenant.tenantsLastName,
         tenantsEmail: data.tenant.tenantsEmail,
         tenantsPhone: data.tenant.tenantsPhone,
         tenantsAddress: data.tenant.tenantsAddress,
@@ -130,12 +131,12 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
         randomID: data.tenant.randomID,
         //  Tenancy
         rentAmount: data.rentAmount,
-        acceptanceCriteria: data.acceptanceCriteria,
+        product: data.product,
         rentStartDate: data.rentStartDate.slice(0, 10),
         rentEndDate: data.rentEndDate.slice(0, 10),
         tenancyID: data.tenancyID,
         // Property
-        building: data.property.building,
+        rentalAddress: data.property.rentalAddress,
         room: data.property.room,
       });
     } else {
@@ -143,7 +144,8 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
         //  Agency
         agencyName: data.agent.agencyName,
         // Tenant
-        tenantsName: data.tenant.tenantsName,
+        tenantsFirstName: data.tenant.tenantsFirstName,
+        tenantsLastName: data.tenant.tenantsLastName,
         tenantsEmail: data.tenant.tenantsEmail,
         tenantsPhone: data.tenant.tenantsPhone,
         tenantsAddress: data.tenant.tenantsAddress,
@@ -157,12 +159,12 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
         randomID: data.tenant.randomID,
         //  Tenancy
         rentAmount: data.rentAmount,
-        acceptanceCriteria: data.acceptanceCriteria,
+        product: data.product,
         rentStartDate: data.rentStartDate.slice(0, 10),
         rentEndDate: data.rentEndDate.slice(0, 10),
         tenancyID: data.tenancyID,
         // Property
-        building: data.property.building,
+        rentalAddress: data.property.rentalAddress,
         room: data.property.room,
       });
     }
@@ -197,13 +199,14 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
 
     //  Send regular data to DB
     await axios.post(
-      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY_STARCITY}`,
+      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY_UKIO}`,
       {
         //  Agency
         agencyName: tenancy.agencyName,
         isAgentAccepted: tenancy.tenantPersonalDetails.isAgentAccepted,
         // Tenant
-        tenantsName: tenancy.tenantContactDetails.tenantName,
+        tenantsFirstName: tenancy.tenantContactDetails.tenantsFirstName,
+        tenantsLastName: tenancy.tenantContactDetails.tenantsLastName,
         tenantsEmail: tenancy.tenantContactDetails.tenantEmail,
         tenantsPhone: tenancy.tenantContactDetails.tenantPhone,
         tenantsAddress: tenantsAddress,
@@ -216,12 +219,12 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
         randomID: randomID,
         //  Tenancy
         rentAmount: tenancy.propertyDetails.rentAmount,
-        acceptanceCriteria: tenancy.tenantPersonalDetails.acceptanceCriteria,
         rentStartDate: tenancy.propertyDetails.rentStartDate,
         rentEndDate: tenancy.propertyDetails.rentEndDate,
+        product: tenancy.propertyDetails.product,
         tenancyID: randomID,
         // Property
-        building: tenancy.propertyDetails.building,
+        rentalAddress: tenancy.propertyDetails.rentalAddress,
         room: tenancy.propertyDetails.room,
       }
     );
@@ -474,19 +477,6 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
                 label={t("F1SC.stepThree.DB")}
                 onChange={changeHandler}
                 required
-              />
-            </div>
-          </div>
-          <div className={styles.GroupInputAlone}>
-            <div className={styles.FormLeft}>
-              <Input
-                type="text"
-                name="acceptanceCriteria"
-                value={tenancy.propertyDetails.acceptanceCriteria}
-                label={t("F1SC.stepZero.acceptance")}
-                placeholder={t("F1SC.stepZero.acceptancePL")}
-                onChange={(e) => handleTenant(e)}
-                error={errors.acceptanceCriteria}
               />
             </div>
           </div>
