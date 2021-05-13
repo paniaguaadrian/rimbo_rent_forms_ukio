@@ -1,6 +1,11 @@
 export const isProperty = (values) => {
   let errors = {};
 
+  if (!values.rentalAddress) {
+    errors.rentalAddress =
+      "You must select the address suggested by Google Maps";
+  }
+
   if (!values.room) {
     errors.room = "Enter a room for the tenant.";
   }
@@ -63,6 +68,11 @@ export const isMoreTenant = (values) => {
 
   if (values.documentNumber && values.documentNumber.length < 8) {
     errors.tenadocumentNumberntPhone = "Enter valid document number";
+  }
+
+  if (!values.tenantsAddress) {
+    errors.tenantsAddress =
+      "You must select the address suggested by Google Maps";
   }
 
   return errors;
