@@ -402,6 +402,12 @@ a{
 					<tr>
 						<td>
 							<div class="text" style="padding: 0em 3em; text-align: left; color: black;">
+								
+								<h3>Agente</h3>
+								<ul>
+									<li>Persona de contacto: {{agencyContactPerson}}</li>
+								</ul>
+
 								<h3>Inquilino:</h3>
 								<ul>
                                     <li>Nombre completo del inquilino: {{tenantsFirstName}} {{tenantsLastName}}</li>
@@ -413,8 +419,21 @@ a{
 									<li>Número de Documento: {{documentNumber}}</li>
 									<li>Ingreso mensual neto: {{monthlyNetIncome}}€</li>
 									<li>Tipo de puesto: {{jobType}}</li>
+
 									<li>Documento identidad (Frontal): {{documentImageFront}}</li>
+
+									{{#if documentImageBack}}
 									<li>Documento identidad (Atrás): {{documentImageBack}}</li>
+									{{else}}
+									<li>Documento identidad (Atrás): Documento no proporcionado</li>
+									{{/if}}
+
+									{{#if lastPayslip}}
+									<li>Última nómina: {{lastPayslip}}</li>
+									{{else}}
+									<li>Última nómina: Documento no proporcionado</li>
+									{{/if}}
+									
                                 </ul>
 								<h3>Información del apartamento</h3>
 								<ul>

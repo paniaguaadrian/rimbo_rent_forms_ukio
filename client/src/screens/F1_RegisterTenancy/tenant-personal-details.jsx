@@ -50,42 +50,49 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
   const [files, setFiles] = useState({
     DF: null,
     DB: null,
+    LP: null,
   });
 
   // Google Maps Address and Zip Code
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
 
+    console.log(results);
+
     const addressComponents = results[0].address_components;
 
-    const route = "route";
-    const locality = "locality";
-    const streetNumber = "street_number";
-    const postalCode = "postal_code";
+    addressComponents.forEach((component) => {
+      if (component.types[0].includes("locality")) {
+        tenancy.tenantPersonalDetails.city = component.long_name;
+      }
 
-    if (
-      addressComponents[0].types[0] === route &&
-      addressComponents[1].types[0] === locality
-    ) {
-      setTenantsZipCode("");
-      setTenantsAddress(results[0].formatted_address);
-    } else if (
-      addressComponents[0].types[0] === streetNumber && // number
-      addressComponents[1].types[0] === route && // Street
-      addressComponents[2].types[0] === locality && // Barcelona
-      addressComponents[6].types[0] === postalCode
-    ) {
-      const street = results[0].address_components[1].long_name;
-      const streetNumber = results[0].address_components[0].long_name;
-      const city = results[0].address_components[2].long_name;
-      const finalAddress = `${street}, ${streetNumber}, ${city}`;
+      if (component.types[0].includes("street_number")) {
+        tenancy.tenantPersonalDetails.streetNumber = component.long_name;
+      }
 
-      setTenantsZipCode(results[0].address_components[6].long_name);
-      setTenantsAddress(finalAddress);
-      tenancy.tenantPersonalDetails.tenantsAddress = finalAddress;
-    }
-    // console.log(tenantsAddress);
-    // setTenantsAddress(finalAddress);
+      if (component.types[0].includes("route")) {
+        tenancy.tenantPersonalDetails.route = component.long_name;
+      }
+
+      if (component.types[0].includes("postal_code")) {
+        setTenantsZipCode(component.long_name);
+        console.log(tenantsZipCode);
+      }
+
+      const finalAddress = `${tenancy.tenantPersonalDetails.route}, ${tenancy.tenantPersonalDetails.streetNumber}, ${tenancy.tenantPersonalDetails.city}`;
+
+      if (
+        !component.types[0].includes("route") ||
+        !component.types[0].includes("postal_code")
+      ) {
+        setTenantsAddress(results[0].formatted_address);
+        tenancy.tenantPersonalDetails.tenantsAddress =
+          results[0].formatted_address;
+      } else {
+        setTenantsAddress(finalAddress);
+        tenancy.tenantPersonalDetails.tenantsAddress = finalAddress;
+      }
+    });
   };
 
   // Handle on change regular Data
@@ -116,6 +123,7 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
       await axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/e1r`, {
         //  Agency
         agencyName: data.agent.agencyName,
+        agencyContactPerson: tenancy.propertyDetails.agencyContactPerson,
         // Tenant
         tenantsFirstName: data.tenant.tenantsFirstName,
         tenantsLastName: data.tenant.tenantsLastName,
@@ -129,6 +137,7 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
         jobType: data.tenant.jobType,
         documentImageFront: data.tenant.documentImageFront,
         documentImageBack: data.tenant.documentImageBack,
+        lastPayslip: data.tenant.lastPayslip,
         randomID: data.tenant.randomID,
         //  Tenancy
         rentAmount: data.rentAmount,
@@ -144,6 +153,7 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
       await axios.post(`${REACT_APP_BASE_URL_EMAIL}/e1r`, {
         //  Agency
         agencyName: data.agent.agencyName,
+        agencyContactPerson: tenancy.propertyDetails.agencyContactPerson,
         // Tenant
         tenantsFirstName: data.tenant.tenantsFirstName,
         tenantsLastName: data.tenant.tenantsLastName,
@@ -157,6 +167,7 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
         jobType: data.tenant.jobType,
         documentImageFront: data.tenant.documentImageFront,
         documentImageBack: data.tenant.documentImageBack,
+        lastPayslip: data.tenant.lastPayslip,
         randomID: data.tenant.randomID,
         //  Tenancy
         rentAmount: data.rentAmount,
@@ -204,6 +215,7 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
       {
         //  Agency
         agencyName: tenancy.agencyName,
+        agencyContactPerson: tenancy.propertyDetails.agencyContactPerson,
         isAgentAccepted: tenancy.tenantPersonalDetails.isAgentAccepted,
         // Tenant
         tenantsFirstName: tenancy.tenantContactDetails.tenantsFirstName,
@@ -226,21 +238,26 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
         tenancyID: randomID,
         // Property
         rentalAddress: tenancy.propertyDetails.rentalAddress,
+        rentalPostalCode: tenancy.propertyDetails.rentalPostalCode,
+        rentalCity: tenancy.propertyDetails.rentalCity,
         room: tenancy.propertyDetails.room,
       }
     );
 
     // Setting files before post
     const formData = new FormData();
-    for (const key in files) {
-      formData.append(key, files[key]);
-    }
+    // for (const key in files) {
+    //   formData.append(key, files[key]);
+    // }
+    formData.append("DF", files.DF);
+    formData.append("DB", files.DB);
+    formData.append("LP", files.LP);
     formData.append("randomID", randomID);
 
     //  Send files to DB
     // ? Stored in a variable to play with it
     const result = await axios.post(
-      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}/starcity/upload`,
+      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}/ukio/upload`,
       formData,
       { randomID }
     );
@@ -254,7 +271,6 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
     // If the post of the files to DB is succeed, we execute the function below and change step
     if (result) {
       try {
-        // setSent(true);
         await executeResult();
         setStep((prevStep) => prevStep + 1);
       } catch (err) {
@@ -478,7 +494,16 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
                 name="DB"
                 label={t("F1SC.stepThree.DB")}
                 onChange={changeHandler}
-                required
+              />
+            </div>
+          </div>
+          <div className={styles.GroupInputAlone}>
+            <div className={styles.FormLeft}>
+              <InputFile
+                type="file"
+                name="LP"
+                label={t("F1SC.stepThree.LP")}
+                onChange={changeHandler}
               />
             </div>
           </div>

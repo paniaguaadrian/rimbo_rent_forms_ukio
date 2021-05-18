@@ -31,6 +31,8 @@
       "productPL": "Escoge un producto",
       "productOne": "1 mes",
       "productTwo": "2 meses",
+      "agencyContactPerson": "Persona de contacto en Ukio",
+      "agencyContactPersonPL": "Escribe el nombre de la persona de contacto",
       "pp1": " Al enviar este formulario, comprendes y aceptas que utilizamos tu información de acuerdo con nuestra",
       "pp2": "política de privacidad",
       "pp3": "y nuestra",
@@ -91,7 +93,9 @@
       "documentNumber": "Número de documento",
       "documentNumberPL": "Escribe el número del documento",
       "DF": "DNI/NIE/Pasaporte (Frontal)",
-      "DB": "DNI/NIE/Pasaporte (Atrás)"
+      "DB": "DNI/NIE (Atrás)",
+      "LP": "Última nómina",
+      "PP": "Previous salary payslip"
     },
     "completed": {
       "header": "Tenant approved by Rimbo",

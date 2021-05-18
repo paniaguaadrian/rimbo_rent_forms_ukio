@@ -1,0 +1,9 @@
+runtime: nodejs12
+service: ukiobackendtest
+# [START variables]
+env_variables:
+  NODE_ENV: "production"
+  SENDGRID_API: "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"
+  PUBLISHEABLE_KEY: "pk_live_6p9ee84PINDA4OOZm6akKRFN004xTau8S7"
+  SECRET_KEY: "sk_live_8m7p0NWsAlpjnhbrAiobBPiw00GVvwmKpt"
+# [END variables]

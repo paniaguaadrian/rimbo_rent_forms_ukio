@@ -4,18 +4,19 @@ import hbs from "nodemailer-express-handlebars";
 
 // * Rimbo rent emails
 // Production / Development
-const rimboEmail = "info@rimbo.rent";
-const ukioEmail = "partners@stayukio.com";
-// const rimboEmail = "victor@rimbo.rent";
-// const ukioEmail = "victor@rimbo.rent";
-// const rimboEmail = "paniaguasanchezadrian@gmail.com";
-// const ukioEmail = "paniaguasanchezadrian@gmail.com";
+// const rimboEmail = "info@rimbo.rent";
+// const ukioEmail = "partners@stayukio.com";
+// const rimboEmail = "test@rimbo.rent";
+// const ukioEmail = "test@rimbo.rent";
+const rimboEmail = "paniaguasanchezadrian@gmail.com";
+const ukioEmail = "paniaguasanchezadrian@gmail.com";
 
 // ? =======>  SPANISH VERSION START ==============================>
 // ! F1SC Form => E1R (email to Rimbo) E1SC (email to Ukio)
 const sendF1SCFormEmails = async (req, res) => {
   const {
     agencyName,
+    agencyContactPerson,
     tenantsFirstName,
     tenantsLastName,
     tenantsEmail,
@@ -28,6 +29,7 @@ const sendF1SCFormEmails = async (req, res) => {
     jobType,
     documentImageFront,
     documentImageBack,
+    lastPayslip,
     randomID,
     rentAmount,
     acceptanceCriteria,
@@ -90,6 +92,7 @@ const sendF1SCFormEmails = async (req, res) => {
     template: "E1REmail",
     context: {
       agencyName,
+      agencyContactPerson,
       tenantsFirstName,
       tenantsLastName,
       tenantsEmail,
@@ -102,6 +105,7 @@ const sendF1SCFormEmails = async (req, res) => {
       jobType,
       documentImageFront,
       documentImageBack,
+      lastPayslip,
       randomID,
       rentAmount,
       acceptanceCriteria,
@@ -475,6 +479,7 @@ const sendF2SCFormEmails = async (req, res) => {
 const sendF1SCFormEmailsEn = async (req, res) => {
   const {
     agencyName,
+    agencyContactPerson,
     tenantsFirstName,
     tenantsLastName,
     tenantsEmail,
@@ -487,6 +492,7 @@ const sendF1SCFormEmailsEn = async (req, res) => {
     jobType,
     documentImageFront,
     documentImageBack,
+    lastPayslip,
     randomID,
     rentAmount,
     acceptanceCriteria,
@@ -549,6 +555,7 @@ const sendF1SCFormEmailsEn = async (req, res) => {
     template: "E1REmailEn",
     context: {
       agencyName,
+      agencyContactPerson,
       tenantsFirstName,
       tenantsLastName,
       tenantsEmail,
@@ -561,6 +568,7 @@ const sendF1SCFormEmailsEn = async (req, res) => {
       jobType,
       documentImageFront,
       documentImageBack,
+      lastPayslip,
       randomID,
       rentAmount,
       acceptanceCriteria,
