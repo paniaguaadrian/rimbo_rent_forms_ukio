@@ -57,9 +57,9 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
 
-    console.log(results);
-
     const addressComponents = results[0].address_components;
+
+    console.log(addressComponents);
 
     addressComponents.forEach((component) => {
       if (component.types[0].includes("locality")) {
@@ -76,15 +76,11 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
 
       if (component.types[0].includes("postal_code")) {
         setTenantsZipCode(component.long_name);
-        console.log(tenantsZipCode);
       }
 
       const finalAddress = `${tenancy.tenantPersonalDetails.route}, ${tenancy.tenantPersonalDetails.streetNumber}, ${tenancy.tenantPersonalDetails.city}`;
 
-      if (
-        !component.types[0].includes("route") ||
-        !component.types[0].includes("postal_code")
-      ) {
+      if (!component.types[0].includes("postal_code")) {
         setTenantsAddress(results[0].formatted_address);
         tenancy.tenantPersonalDetails.tenantsAddress =
           results[0].formatted_address;
@@ -246,12 +242,9 @@ const TenantPersonalDetails = ({ step, setStep, tenancy, setTenancy, t }) => {
 
     // Setting files before post
     const formData = new FormData();
-    // for (const key in files) {
-    //   formData.append(key, files[key]);
-    // }
-    formData.append("DF", files.DF);
-    formData.append("DB", files.DB);
-    formData.append("LP", files.LP);
+    for (const key in files) {
+      formData.append(key, files[key]);
+    }
     formData.append("randomID", randomID);
 
     //  Send files to DB
