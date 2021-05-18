@@ -380,7 +380,8 @@ a{
             	<tr>
             		<td>
             			<div class="text" style="padding: 0 3em; text-align: center;">
-							<h3>Yay!</h3>				
+                            <h3>Hola {{agencyName}},</h3>
+							<h3>¡Buenas noticias!</h3>				
             			</div>
             		</td>
             	</tr>
@@ -393,166 +394,34 @@ a{
 		          <tr>
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: center; padding: 0 30px;">
-		              	<h3>The agency {{agencyName}} has filled the form</h3>
+		              	<h3>¡El inquilino {{tenantsFirstName}} {{tenantsLastName}} que quiere alquilar la propiedad en {{rentalAddress}} ha sido aprobado por Rimbo! El inquilino ha recibido un mail para registrar su tarjeta con nosotros.</h3>
 
 		            	</div>
 		          </tr><!-- end: tr -->
 					<td valign="middle" class="hero hero-2 bg_white" style="padding: 1em 0;">
-				<table>
-					<tr>
-						<td>
-							<div class="text" style="padding: 0em 3em; text-align: left; color: black;">
-								
-								<h3>Agent:</h3>
-								<ul>
-									<li>Contact Person: {{agencyContactPerson}}</li>
-								</ul>
-								<h3>Tenant:</h3>
-								<ul>
-                                    <li>Tenant's full name: {{tenantsFirstName}} {{tenantsLastName}}</li>
-                                    <li>Tenant's email: {{tenantsEmail}}</li>
-									<li>Tenant's phone number: {{tenantsPhone}}</li>
-									<li>Tenant's current address: {{tenantsAddress}}</li>
-									<li>Postal code: {{tenantsZipCode}}</li>
-									<li>Document type: {{documentType}}</li>
-									<li>Document number: {{documentNumber}}</li>
-									<li>Monthly net income: {{monthlyNetIncome}}€</li>
-									<li>Job type: {{jobType}}</li>
-
-									<li>Document image (Front): {{documentImageFront}}</li>
-
-									{{#if documentImageBack}}
-									<li>Document image (Back): {{documentImageBack}}</li>
-									{{else}}
-									<li>Document image (Back): Document not uploaded</li>
-									{{/if}}
-
-									{{#if lastPayslip}}
-									<li>Last payslip: {{lastPayslip}}</li>
-									{{else}}
-									<li>Last payslip: Document not uploaded</li>
-									{{/if}}
-                                </ul>
-								<h3>Apartment: </h3>
-								<ul>
-									<li>Rent amount: {{rentAmount}}€</li>
-                                    <li>Rental Address: {{rentalAddress}}</li>
-                                    <li>Room: {{room}}</li>
-                                    <li>Rent start date: {{rentStartDate}}</li>
-                                    <li>Rent end date: {{rentEndDate}}</li>
-									<li>Rimbo Product: {{product}}</li>
-								</ul>
-								
-							</div>
-						</td>
-					</tr>
-				</table>
-
 				{{!-- <table>
 					<tr>
 						<td>
-							<div class="text" style="padding: 1em 3em; text-align: left;">
-								
-								<h3>Nos pondremos en contacto con el/la inquilino/a y llevaremos a cabo la evaluación para garantizar su solvencia. Una vez completada la evaluación, te la enviaremos.</h3>
-								
+							<div class="text" style="padding: 0em 3em; text-align: left; color: black;">
+								<h3>Datos de contacto:</h3>
+								<ul>
+                                    <li>Nombre completo del inquilino: {{tenantsFirstName}} {{tenantsLastName}}</li>
+                                    <li>Correo electrónico del inquilino: {{tenantsEmail}}</li>
+									<li>Número de teléfono del inquilino: {{tenantsPhone}}</li>
 							</div>
 						</td>
 					</tr>
 				</table> --}}
 
-				{{!-- <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+				<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
 		          <tr>
 		            <td class="bg_white email-section">
 		            	<div class="heading-section" style="text-align: center;">
-		              	<h3>And Gloria... determine that... the tenant will be... (press a button!)</h3>
+		              	<h3>Un saludo,</h3>
 						  
 		          </tr><!-- end: tr -->
-					
-			</table> --}}
-
-				{{!-- <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-		          <tr>
-		            <td class="bg_white email-section">
-		            	<div class="heading-section" style="text-align: center; padding: 0 30px; color: #6aa3a1;">
-		              	<h2>It sounds great, doesn't it?</h2>
-						  <h4>Well - it’s true and you’re now part of the StarCity-Rimbo family!</h4>
-		              	
-		            	</div>
-		          </tr><!-- end: tr -->
-					
-			</table> --}}
-					
-			{{!-- <table>
-					<tr>
-						<td>
-							<div class="text" style="padding: 1em 3em; text-align: left;">
-								
-								<h3>Tan pronto como se realice la evaluación, nos pondremos en contacto contigo para completar el proceso de alquiler de esta propiedad.</h3>
-
-								<h3>Por favor, comprueba tu correo electrónico en las próximas horas.</h3>
-
-								<h3>¡A partir de ahora, gestionar este alquiler será más seguro y rápido que nunca!</h3>
-
-
-								
-							</div>
-						</td>
-					</tr>
-			</table> --}}
-
-			{{!-- <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-		          <tr>
-		            <td class="bg_white email-section">
-		            	<div class="heading-section" style="text-align: center; padding: 0px 30px; color: #6aa3a1;">
-		              	<h3>¡Saludos cordiales de nuestro equipo!</h3>
-						  
-		          </tr><!-- end: tr -->
-					
 			</table>
-			<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-		          <tr>
-		            <td class="bg_white email-section">
-		            	<div class="heading-section" style="text-align: left; padding: 0px 30px; color: #6aa3a1;">
-		              	
-						<h3>Equipo de Soporte,</h3>
-		              	<h4>Móvil -  WhatsApp: +34 623 063 769<br/>
-      					E-Mail: info@rimbo.com<br/>
-      					Web: <a href="http://www.rimbo.rent">rimbo.rent</a>
-      					</h4>
-		            	</div>
-		          </tr><!-- end: tr -->
-					
-			</table> --}}
-
-			<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-		          <tr>
-		            <td class="bg_white email-section">
-		            	<div class="heading-section" style="text-align: center; padding: 0px 30px;">
-		              	
-						{{!-- <button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/tenancy/{{tenancyID}}/approved">¡Aprobar!(D)</a></button>
-						
-                        <button class='btn-rimbo' type="button"><a href="http://localhost:3000/register/tenancy/{{tenancyID}}/rejected">¡Rechazar!(D)</a></button> --}}
-
-
-						{{!-- <button class='btn-rimbo' type="button"><a href="https://ukiofrontend-dot-rimbo-partners.oa.r.appspot.com/register/tenancy/{{tenancyID}}/approved">¡Aprobar!</a></button>
-
-                        <button class='btn-rimbo' type="button"><a href="https://ukiofrontend-dot-rimbo-partners.oa.r.appspot.com/register/tenancy/{{tenancyID}}/rejected">¡Rechazar!</a></button> --}}
-
-						<button class='btn-rimbo' type="button"><a href="https://ukio.rimbo.rent/register/tenancy/{{tenancyID}}/approved">Accept!</a></button>
-
-                        <button class='btn-rimbo' type="button"><a href="https://ukio.rimbo.rent/register/tenancy/{{tenancyID}}/rejected">Reject</a></button>
-
-						  
-		          </tr><!-- end: tr -->
-					
-			</table>
-			
-          
 		    </tr><!-- end:tr -->
-			
-
-
-
       <!-- 1 Column Text + Button : END -->
       </table>
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin:auto;">
@@ -580,6 +449,7 @@ a{
 					                <li><a href="http://www.rimbo.rent">Rimbo Rent</a></li>
 					                <li><a href="https://www.stayukio.com/">UKIO</a></li>
 					                
+									
 					              </ul>
                       </td>
                     </tr>

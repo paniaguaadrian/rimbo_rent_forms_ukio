@@ -14,7 +14,7 @@ import { TenantReducer, DefaultTenant } from "./approved_tenant_rimbo-reducer";
 
 // Multi language
 import { withNamespaces } from "react-i18next";
-// import i18n from "../../i18n";
+import i18n from "../../i18n";
 
 // End-Points env
 const {
@@ -32,13 +32,11 @@ const ApprovedTenantRimbo = ({ t }) => {
   const [state, setState] = useState(null); // eslint-disable-line
 
   useEffect(() => {
-    // Simplify fetchUserData.
     const fetchUserData = () =>
       axios.get(
         `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`
       );
 
-    // Add body to post decision. So we can send data.
     const postDecision = (body) =>
       axios.post(
         `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}/approved`,
@@ -47,18 +45,13 @@ const ApprovedTenantRimbo = ({ t }) => {
 
     const processDecision = async () => {
       const { data: tenancyData } = await fetchUserData();
-      // let's console.log userData here, so we know it is in the right format.
-      // console.log(tenancyData);
 
       const postBody = {
-        // use some logic based on tenancyData here to make the postBody
         isRimboAccepted: tenant.isRimboAccepted,
         randomID: tenancyData.tenant.randomID,
       };
 
-      // If the above use of {data} is correct it should be correct here too.
       const { data: decisionResult } = await postDecision(postBody);
-      // console.log(postBody);
 
       const { tenantsFirstName, tenantsLastName, tenantsEmail, randomID } =
         tenancyData.tenant;
@@ -66,48 +59,28 @@ const ApprovedTenantRimbo = ({ t }) => {
       const { rentalAddress, room } = tenancyData.property;
       const { tenancyID, rentStartDate, rentEndDate } = tenancyData;
 
-      if (tenancyData.tenant.isRimboAccepted === false) {
-        axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2tt`, {
-          tenantsFirstName,
-          tenantsLastName,
-          tenantsEmail,
-          randomID,
-          agencyName,
-          rentalAddress,
-          room,
-          tenancyID,
-          rentStartDate,
-          rentEndDate,
-        });
-      }
+      const emailData = {
+        tenantsFirstName,
+        tenantsLastName,
+        tenantsEmail,
+        randomID,
+        agencyName,
+        rentalAddress,
+        room,
+        tenancyID,
+        rentStartDate,
+        rentEndDate,
+      };
 
-      // if (tenancyData.tenant.isRimboAccepted === false) {
-      //   if (i18n.language === "en") {
-      //     axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/e2tt`, {
-      //       tenantsName,
-      //       tenantsEmail,
-      //       randomID,
-      //       agencyName,
-      //       building,
-      //       room,
-      //       tenancyID,
-      //       rentStartDate,
-      //       rentEndDate,
-      //     });
-      //   } else {
-      //     axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2tt`, {
-      //       tenantsName,
-      //       tenantsEmail,
-      //       randomID,
-      //       agencyName,
-      //       building,
-      //       room,
-      //       tenancyID,
-      //       rentStartDate,
-      //       rentEndDate,
-      //     });
-      //   }
-      // }
+      if (tenancyData.tenant.isRimboAccepted === false) {
+        axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2tt`, emailData);
+
+        if (i18n.language === "en") {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/e2pm`, emailData);
+        } else {
+          axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2pm`, emailData);
+        }
+      }
 
       setState(decisionResult);
     };

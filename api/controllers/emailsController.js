@@ -247,6 +247,77 @@ const sendE1REmailEmails = async (req, res) => {
   res.status(200).json();
 };
 
+// ! E1R Email => E2PM (email to PM / Ukio)
+const sendE1REmailPM = async (req, res) => {
+  const {
+    tenantsFirstName,
+    tenantsLastName,
+    tenantsEmail,
+    randomID,
+    agencyName,
+    rentalAddress,
+    room,
+    tenancyID,
+    rentStartDate,
+    rentEndDate,
+  } = req.body;
+
+  const transporterE2PP = nodemailer.createTransport(
+    sgTransport({
+      auth: {
+        api_key: process.env.SENDGRID_API,
+      },
+    })
+  );
+
+  let optionsE2PP = {
+    viewEngine: {
+      extname: ".handlebars",
+      layoutsDir: "views/",
+      defaultLayout: "E2PPEmail",
+    },
+    viewPath: "views/",
+  };
+
+  transporterE2PP.use("compile", hbs(optionsE2PP));
+
+  const UkioEmail = {
+    from: "Ukio & Rimbo info@rimbo.rent",
+    to: ukioEmail, // ukio Email
+    subject: `${tenantsFirstName} ${tenantsLastName} ha sido aceptado por Rimbo!`,
+    attachments: [
+      {
+        filename: "ukio_logo.jpeg",
+        path: "./views/images/ukio_logo.jpeg",
+        cid: "ukiologo",
+      },
+    ],
+    template: "E2PPEmail",
+    context: {
+      tenantsFirstName,
+      tenantsLastName,
+      tenantsEmail,
+      randomID,
+      agencyName,
+      rentalAddress,
+      room,
+      tenancyID,
+      rentStartDate,
+      rentEndDate,
+    },
+  };
+
+  transporterE2PP.sendMail(UkioEmail, (err, data) => {
+    if (err) {
+      console.log("There is an error here...!" + err);
+    } else {
+      console.log("Email sent!");
+    }
+  });
+
+  res.status(200).json();
+};
+
 // ! F2SC Form => E2R (email to Rimbo that informs tenant is on F2SC)
 const sendNotificationRimbo = async (req, res) => {
   const {
@@ -709,6 +780,77 @@ const sendE1REmailEmailsEn = async (req, res) => {
   res.status(200).json();
 };
 
+// ! E1R Email => E2PM (email to PM / Ukio)
+const sendE1REmailPMEn = async (req, res) => {
+  const {
+    tenantsFirstName,
+    tenantsLastName,
+    tenantsEmail,
+    randomID,
+    agencyName,
+    rentalAddress,
+    room,
+    tenancyID,
+    rentStartDate,
+    rentEndDate,
+  } = req.body;
+
+  const transporterE2PP = nodemailer.createTransport(
+    sgTransport({
+      auth: {
+        api_key: process.env.SENDGRID_API,
+      },
+    })
+  );
+
+  let optionsE2PP = {
+    viewEngine: {
+      extname: ".handlebars",
+      layoutsDir: "views/",
+      defaultLayout: "E2PPEmailEn",
+    },
+    viewPath: "views/",
+  };
+
+  transporterE2PP.use("compile", hbs(optionsE2PP));
+
+  const UkioEmail = {
+    from: "Ukio & Rimbo info@rimbo.rent",
+    to: ukioEmail, // ukio Email
+    subject: `${tenantsFirstName} ${tenantsLastName} has been accepted by Rimbo!`,
+    attachments: [
+      {
+        filename: "ukio_logo.jpeg",
+        path: "./views/images/ukio_logo.jpeg",
+        cid: "ukiologo",
+      },
+    ],
+    template: "E2PPEmailEn",
+    context: {
+      tenantsFirstName,
+      tenantsLastName,
+      tenantsEmail,
+      randomID,
+      agencyName,
+      rentalAddress,
+      room,
+      tenancyID,
+      rentStartDate,
+      rentEndDate,
+    },
+  };
+
+  transporterE2PP.sendMail(UkioEmail, (err, data) => {
+    if (err) {
+      console.log("There is an error here...!" + err);
+    } else {
+      console.log("Email sent!");
+    }
+  });
+
+  res.status(200).json();
+};
+
 // ! F2SC Form => E2R (email to Rimbo that informs tenant is on F2SC)
 const sendNotificationRimboEn = async (req, res) => {
   const {
@@ -939,10 +1081,12 @@ const sendF2SCFormEmailsEn = async (req, res) => {
 export {
   sendF1SCFormEmails,
   sendE1REmailEmails,
+  sendE1REmailPM,
   sendNotificationRimbo,
   sendF2SCFormEmails,
   sendF1SCFormEmailsEn,
   sendE1REmailEmailsEn,
+  sendE1REmailPMEn,
   sendNotificationRimboEn,
   sendF2SCFormEmailsEn,
 };
