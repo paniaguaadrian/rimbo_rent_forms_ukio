@@ -1,5 +1,5 @@
 // React components
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -29,7 +29,7 @@ const ApprovedTenantRimbo = ({ t }) => {
   const randomID = tenancyID;
   const [tenant] = useReducer(TenantReducer, DefaultTenant);
 
-  const [state, setState] = useState(null); // eslint-disable-line
+  const [state, setState] = React.useState(null); // eslint-disable-line
 
   useEffect(() => {
     const fetchUserData = () =>
@@ -51,7 +51,7 @@ const ApprovedTenantRimbo = ({ t }) => {
         randomID: tenancyData.tenant.randomID,
       };
 
-      const { data: decisionResult } = await postDecision(postBody);
+      // const { data: decisionResult } = await postDecision(postBody);
 
       const { tenantsFirstName, tenantsLastName, tenantsEmail, randomID } =
         tenancyData.tenant;
@@ -80,13 +80,12 @@ const ApprovedTenantRimbo = ({ t }) => {
         } else {
           axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2pm`, emailData);
         }
+        postDecision(postBody);
       }
-
-      setState(decisionResult);
     };
 
     processDecision();
-  }, [randomID, tenant.isRimboAccepted, tenancyID]);
+  }, []); // eslint-disable-line
 
   return (
     <>
