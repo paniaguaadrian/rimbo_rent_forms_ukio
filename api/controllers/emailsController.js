@@ -247,7 +247,7 @@ const sendE1REmailEmails = async (req, res) => {
   res.status(200).json();
 };
 
-// ! E1R Email => E2PM (email to PM / Ukio)
+// ! E1R Email => E2PM (email to PM / Ukio and Rimbo)
 const sendE1REmailPM = async (req, res) => {
   const {
     tenantsFirstName,
@@ -270,6 +270,14 @@ const sendE1REmailPM = async (req, res) => {
     })
   );
 
+  const transporterRCE = nodemailer.createTransport(
+    sgTransport({
+      auth: {
+        api_key: process.env.SENDGRID_API,
+      },
+    })
+  );
+
   let optionsE2PP = {
     viewEngine: {
       extname: ".handlebars",
@@ -279,7 +287,17 @@ const sendE1REmailPM = async (req, res) => {
     viewPath: "views/",
   };
 
+  let optionsRCE = {
+    viewEngine: {
+      extname: ".handlebars",
+      layoutsDir: "views/",
+      defaultLayout: "RimboConfirmEmailEn",
+    },
+    viewPath: "views/",
+  };
+
   transporterE2PP.use("compile", hbs(optionsE2PP));
+  transporterRCE.use("compile", hbs(optionsRCE));
 
   const UkioEmail = {
     from: "Ukio & Rimbo info@rimbo.rent",
@@ -307,7 +325,41 @@ const sendE1REmailPM = async (req, res) => {
     },
   };
 
+  const RimboEmail = {
+    from: "Ukio & Rimbo info@rimbo.rent",
+    to: rimboEmail, // ukio Email
+    subject: `${tenantsFirstName} ${tenantsLastName} was acccepted by Rimbo`,
+    attachments: [
+      {
+        filename: "ukio_logo.jpeg",
+        path: "./views/images/ukio_logo.jpeg",
+        cid: "ukiologo",
+      },
+    ],
+    template: "RimboConfirmEmailEn",
+    context: {
+      tenantsFirstName,
+      tenantsLastName,
+      tenantsEmail,
+      randomID,
+      agencyName,
+      rentalAddress,
+      room,
+      tenancyID,
+      rentStartDate,
+      rentEndDate,
+    },
+  };
+
   transporterE2PP.sendMail(UkioEmail, (err, data) => {
+    if (err) {
+      console.log("There is an error here...!" + err);
+    } else {
+      console.log("Email sent!");
+    }
+  });
+
+  transporterRCE.sendMail(RimboEmail, (err, data) => {
     if (err) {
       console.log("There is an error here...!" + err);
     } else {
@@ -780,7 +832,7 @@ const sendE1REmailEmailsEn = async (req, res) => {
   res.status(200).json();
 };
 
-// ! E1R Email => E2PM (email to PM / Ukio)
+// ! E1R Email => E2PM (email to PM / Ukio and Rimbo)
 const sendE1REmailPMEn = async (req, res) => {
   const {
     tenantsFirstName,
@@ -803,6 +855,14 @@ const sendE1REmailPMEn = async (req, res) => {
     })
   );
 
+  const transporterRCE = nodemailer.createTransport(
+    sgTransport({
+      auth: {
+        api_key: process.env.SENDGRID_API,
+      },
+    })
+  );
+
   let optionsE2PP = {
     viewEngine: {
       extname: ".handlebars",
@@ -812,7 +872,17 @@ const sendE1REmailPMEn = async (req, res) => {
     viewPath: "views/",
   };
 
+  let optionsRCE = {
+    viewEngine: {
+      extname: ".handlebars",
+      layoutsDir: "views/",
+      defaultLayout: "RimboConfirmEmailEn",
+    },
+    viewPath: "views/",
+  };
+
   transporterE2PP.use("compile", hbs(optionsE2PP));
+  transporterRCE.use("compile", hbs(optionsRCE));
 
   const UkioEmail = {
     from: "Ukio & Rimbo info@rimbo.rent",
@@ -840,7 +910,41 @@ const sendE1REmailPMEn = async (req, res) => {
     },
   };
 
+  const RimboEmail = {
+    from: "Ukio & Rimbo info@rimbo.rent",
+    to: rimboEmail, // ukio Email
+    subject: `${tenantsFirstName} ${tenantsLastName} was acccepted by Rimbo`,
+    attachments: [
+      {
+        filename: "ukio_logo.jpeg",
+        path: "./views/images/ukio_logo.jpeg",
+        cid: "ukiologo",
+      },
+    ],
+    template: "RimboConfirmEmailEn",
+    context: {
+      tenantsFirstName,
+      tenantsLastName,
+      tenantsEmail,
+      randomID,
+      agencyName,
+      rentalAddress,
+      room,
+      tenancyID,
+      rentStartDate,
+      rentEndDate,
+    },
+  };
+
   transporterE2PP.sendMail(UkioEmail, (err, data) => {
+    if (err) {
+      console.log("There is an error here...!" + err);
+    } else {
+      console.log("Email sent!");
+    }
+  });
+
+  transporterRCE.sendMail(RimboEmail, (err, data) => {
     if (err) {
       console.log("There is an error here...!" + err);
     } else {
