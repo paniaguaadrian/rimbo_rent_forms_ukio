@@ -2,10 +2,10 @@ import nodemailer from "nodemailer";
 import sgTransport from "nodemailer-sendgrid-transport";
 import hbs from "nodemailer-express-handlebars";
 
-// * Rimbo rent emails
-// Production / Development
+// * Production
 const rimboEmail = "info@rimbo.rent";
 const ukioEmail = "partners@stayukio.com";
+// * Development
 // const rimboEmail = "test@rimbo.rent";
 // const ukioEmail = "test@rimbo.rent";
 // const rimboEmail = "paniaguasanchezadrian@gmail.com";
@@ -212,6 +212,7 @@ const sendE1REmailEmails = async (req, res) => {
   const TenantEmail = {
     from: "Ukio & Rimbo info@rimbo.rent",
     to: tenantsEmail, // tenants Email
+    bcc: rimboEmail,
     subject:
       "Bienvenido a la revolución de los depósitos - Welcome to the deposit revolution",
     attachments: [

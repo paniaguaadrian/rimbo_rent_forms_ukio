@@ -1,5 +1,5 @@
 // React components
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -29,63 +29,57 @@ const ApprovedTenantRimbo = ({ t }) => {
   const randomID = tenancyID;
   const [tenant] = useReducer(TenantReducer, DefaultTenant);
 
-  const [state, setState] = React.useState(null); // eslint-disable-line
+  const fetchUserData = () =>
+    axios.get(
+      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`
+    );
 
-  useEffect(() => {
-    const fetchUserData = () =>
-      axios.get(
-        `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANCY}/${tenancyID}`
-      );
+  const postDecision = (body) =>
+    axios.post(
+      `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}/approved`,
+      body
+    );
 
-    const postDecision = (body) =>
-      axios.post(
-        `${REACT_APP_BASE_URL}${REACT_APP_API_RIMBO_TENANT}/${randomID}/approved`,
-        body
-      );
+  const processDecision = async () => {
+    const { data: tenancyData } = await fetchUserData();
 
-    const processDecision = async () => {
-      const { data: tenancyData } = await fetchUserData();
-
-      const postBody = {
-        isRimboAccepted: tenant.isRimboAccepted,
-        randomID: tenancyData.tenant.randomID,
-      };
-
-      // const { data: decisionResult } = await postDecision(postBody);
-
-      const { tenantsFirstName, tenantsLastName, tenantsEmail, randomID } =
-        tenancyData.tenant;
-      const { agencyName } = tenancyData.agent;
-      const { rentalAddress, room } = tenancyData.property;
-      const { tenancyID, rentStartDate, rentEndDate } = tenancyData;
-
-      const emailData = {
-        tenantsFirstName,
-        tenantsLastName,
-        tenantsEmail,
-        randomID,
-        agencyName,
-        rentalAddress,
-        room,
-        tenancyID,
-        rentStartDate,
-        rentEndDate,
-      };
-
-      if (tenancyData.tenant.isRimboAccepted === false) {
-        axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2tt`, emailData);
-
-        if (i18n.language === "en") {
-          axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/e2pm`, emailData);
-        } else {
-          axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2pm`, emailData);
-        }
-        postDecision(postBody);
-      }
+    const postBody = {
+      isRimboAccepted: tenant.isRimboAccepted,
+      randomID: tenancyData.tenant.randomID,
     };
 
-    processDecision();
-  }, []); // eslint-disable-line
+    const { tenantsFirstName, tenantsLastName, tenantsEmail, randomID } =
+      tenancyData.tenant;
+    const { agencyName } = tenancyData.agent;
+    const { rentalAddress, room } = tenancyData.property;
+    const { tenancyID, rentStartDate, rentEndDate } = tenancyData;
+
+    const emailData = {
+      tenantsFirstName,
+      tenantsLastName,
+      tenantsEmail,
+      randomID,
+      agencyName,
+      rentalAddress,
+      room,
+      tenancyID,
+      rentStartDate,
+      rentEndDate,
+    };
+
+    if (tenancyData.tenant.isRimboAccepted === false) {
+      await axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2tt`, emailData);
+
+      if (i18n.language === "en") {
+        await axios.post(`${REACT_APP_BASE_URL_EMAIL}/en/e2pm`, emailData);
+      } else {
+        await axios.post(`${REACT_APP_BASE_URL_EMAIL}/e2pm`, emailData);
+      }
+      await postDecision(postBody);
+    }
+  };
+
+  processDecision();
 
   return (
     <>
